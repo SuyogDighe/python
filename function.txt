@@ -1,0 +1,23 @@
+create or replace function try_parse(iv_number in varchar2)
+    return number is
+BEGIN
+return to_number(iv_number);
+exception
+    when others then
+    return null;
+end;
+
+set serveroutput on size 1000000;
+declare 
+n_x number;
+n_y number;
+n_z number;
+begin
+n_x := try_parse('574');
+n_y := try_parse('12.21');
+n_z := try_parse('abcd');
+
+dbms_output.put_line(n_x);
+dbms_output.put_line(n_y);
+dbms_output.put_line(n_z);
+end;
